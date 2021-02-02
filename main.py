@@ -1,6 +1,16 @@
-from slacker import Slacker
 import secret
 
-slack = Slacker(secret.SLACK_TOKEN)
+# from slacksocket import SlackSocket
+from slacker import Slacker
 
-slack.chat.post_message("#team", "successed!")
+
+# 메세지 보내기
+slack = Slacker(secret.SLACK_TOKEN)
+slack.chat.post_message('#team', 'Hello')
+
+# 메세지 주고 받기
+
+# s = SlackSocket(secret.SLACK_TOKEN, translate=True)
+
+# for event in s.events():
+#     print(event.json)
