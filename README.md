@@ -39,8 +39,27 @@ Cherish 어플 릴리즈 전 MVP 테스트 가능여부 체크를 위한 코드
 
 # 구현 방법
 1. MVP 참여자들로부터 `애칭` `연락 주기` `알람 시간`을 받는다.
-2. 슬랙 API에서 해당 봇에 맞는 token을 받아 `secret.py`에 저장한다. token은 `xoxb-`로 시작하는 문자열이며, `secret.py`는 `.gitignore`에 포함시켜 github에 올라가지 않도록 한다. **(github을 비롯한 각종 플랫폼에 공유될 경우 슬랙 API 차단됨)**
+
+2. 슬랙 API에서 해당 봇에 맞는 token을 받아 `secret.py`에 저장한다.
+   token은 `xoxb-`로 시작하는 문자열이며, `secret.py`는 `.gitignore`에 포함시켜 github에 올라가지 않도록 한다.
+   **(github을 비롯한 각종 플랫폼에 공유될 경우 슬랙 API 차단됨)**
+
 3. `slacker`의 `chat.post_message(#channel_name, msg)`를 통해 `#mvp_test`에 `msg`를 보내는 코드를 작성하여 각각의 파일을 만든다. -> `main.py` 참고
-4. `crontab -e`으로 크론을 작성하는데, 형식은 `* * * * * [command || .sh]`이며, 각 `*`은 분, 시간, 일, 월, 요일을 의미한다. 시간 지정의 경우 인스턴스의 기준 시각을 `date`를 통해 확인한다. (한국 : KST, 영국 : UCT, locatltime 변경 명령 : `sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime`)
-5. 크론의 command 작성 시 실행 파일(`python3` 등)의 경로를 함께 기재해야할 수도 있다. `.sh`로 작성 시에는 `chmod`를 통해 권한 설정을 해야 한다. Cherish mvp의command : `python3 [route/file_name]`
+
+4. `crontab -e`으로 크론을 작성한다.
+
+   ```
+   형식 : * * * * * [command || .sh]
+   각 *은 분, 시간, 일, 요일을 의미
+   시간 지정의 경우 인스턴스 환경의 기준시각을 확인(cmd : date, KST : 한국, UCT : 영국)
+   기준 시각 변경 명령은 sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+   ```
+
+5. 크론의 command 작성 시 실행 파일(`python3` 등)의 경로를 함께 기재해야할 수도 있다.
+   `.sh`로 작성 시에는 `chmod`를 통해 권한 설정을 해야 한다.
+
+   ````
+   Cherish mvp cmd : `python3 [route/file_name]
+   ````
+
 6. 크론 로그를 남기고 싶은 경우 크론 커멘드 뒤에 `>> [route/log_file_name.log] 2>&1`를 추가하고, `mvp_cron.log`를 경로에 맞추서 생성한 뒤 `chmod 777 [file_name]`을 통해 권한을 설정해준다.
