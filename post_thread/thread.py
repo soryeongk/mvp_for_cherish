@@ -8,8 +8,9 @@ import trace
 msg = trace.msg.split('-')
 users = {'U0147A175RQ': '소령'}
 user_id = trace.user
+user = users[user_id]
 
-message = f":cherries: {users[user_id]}님, 오늘을 기점으로 `{msg[1]}일`에 한 번 `{msg[2]}시` `{msg[0]}`에게의 물주기 신청이 완료되었습니다!"
+message = f":cherries: {user}님, 오늘을 기점으로 `{msg[1]}일`에 한 번 `{msg[2]}시` `{msg[0]}`에게의 물주기 신청이 완료되었습니다!"
 
 # 파라미터
 data = {'Content-Type': 'application/x-www-form-urlencoded',
