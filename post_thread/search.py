@@ -4,8 +4,6 @@ from pandas.io.json import json_normalize
 import secret
 
 
-slack_token = secret.SLACK_TOKEN
-
 # 채널 이름
 ChannelName = "mvp_test"
 
@@ -15,7 +13,7 @@ URL = 'https://slack.com/api/conversations.list'
 # 파라미터
 params = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'token': slack_token
+    'token': secret.SLACK_TOKEN
 }
 
 # API 호출
